@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.app.member.dao.TblOccupationCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.platform.app.member.vo.TblOccupationCategory">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="BIG_CATEGORY" jdbcType="VARCHAR" property="bigCategory" />
+    <result column="BIG_CATEGORY_NAME" jdbcType="VARCHAR" property="bigCategoryName" />
+    <result column="MEDIUM_CATEGORY" jdbcType="VARCHAR" property="mediumCategory" />
+    <result column="MEDIUM_CATEGORY_NAME" jdbcType="VARCHAR" property="mediumCategoryName" />
+    <result column="SMALL_CATEGORY" jdbcType="VARCHAR" property="smallCategory" />
+    <result column="SMALL_CATEGORY_NAME" jdbcType="VARCHAR" property="smallCategoryName" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="MODIFIER_TIME" jdbcType="TIMESTAMP" property="modifierTime" />
+    <result column="FLAG" jdbcType="VARCHAR" property="flag" />
+    <result column="BATCH_NUMBER" jdbcType="VARCHAR" property="batchNumber" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, BIG_CATEGORY, BIG_CATEGORY_NAME, MEDIUM_CATEGORY, MEDIUM_CATEGORY_NAME, SMALL_CATEGORY, 
+    SMALL_CATEGORY_NAME, TYPE, CREATOR, CREATE_TIME, MODIFIER, MODIFIER_TIME, FLAG, BATCH_NUMBER, 
+    REMARK
+  </sql>
+  <select id="selectByExample" parameterType="com.platform.app.member.vo.TblOccupationCategoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tbl_occupation_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.platform.app.member.vo.TblOccupationCategoryExample">
+    delete from tbl_occupation_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.platform.app.member.vo.TblOccupationCategory">
+    insert into tbl_occupation_category (ID, BIG_CATEGORY, BIG_CATEGORY_NAME, 
+      MEDIUM_CATEGORY, MEDIUM_CATEGORY_NAME, SMALL_CATEGORY, 
+      SMALL_CATEGORY_NAME, TYPE, CREATOR, 
+      CREATE_TIME, MODIFIER, MODIFIER_TIME, 
+      FLAG, BATCH_NUMBER, REMARK
+      )
+    values (#{id,jdbcType=INTEGER}, #{bigCategory,jdbcType=VARCHAR}, #{bigCategoryName,jdbcType=VARCHAR}, 
+      #{mediumCategory,jdbcType=VARCHAR}, #{mediumCategoryName,jdbcType=VARCHAR}, #{smallCategory,jdbcType=VARCHAR}, 
+      #{smallCategoryName,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, #{modifierTime,jdbcType=TIMESTAMP}, 
+      #{flag,jdbcType=VARCHAR}, #{batchNumber,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.platform.app.member.vo.TblOccupationCategory">
+    insert into tbl_occupation_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="bigCategory != null">
+        BIG_CATEGORY,
+      </if>
+      <if test="bigCategoryName != null">
+        BIG_CATEGORY_NAME,
+      </if>
+      <if test="mediumCategory != null">
+        MEDIUM_CATEGORY,
+      </if>
+      <if test="mediumCategoryName != null">
+        MEDIUM_CATEGORY_NAME,
+      </if>
+      <if test="smallCategory != null">
+        SMALL_CATEGORY,
+      </if>
+      <if test="smallCategoryName != null">
+        SMALL_CATEGORY_NAME,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="modifierTime != null">
+        MODIFIER_TIME,
+      </if>
+      <if test="flag != null">
+        FLAG,
+      </if>
+      <if test="batchNumber != null">
+        BATCH_NUMBER,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bigCategory != null">
+        #{bigCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="bigCategoryName != null">
+        #{bigCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="mediumCategory != null">
+        #{mediumCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="mediumCategoryName != null">
+        #{mediumCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="smallCategory != null">
+        #{smallCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="smallCategoryName != null">
+        #{smallCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="modifierTime != null">
+        #{modifierTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNumber != null">
+        #{batchNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.platform.app.member.vo.TblOccupationCategoryExample" resultType="java.lang.Long">
+    select count(*) from tbl_occupation_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tbl_occupation_category
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.bigCategory != null">
+        BIG_CATEGORY = #{record.bigCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bigCategoryName != null">
+        BIG_CATEGORY_NAME = #{record.bigCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mediumCategory != null">
+        MEDIUM_CATEGORY = #{record.mediumCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mediumCategoryName != null">
+        MEDIUM_CATEGORY_NAME = #{record.mediumCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smallCategory != null">
+        SMALL_CATEGORY = #{record.smallCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smallCategoryName != null">
+        SMALL_CATEGORY_NAME = #{record.smallCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifier != null">
+        MODIFIER = #{record.modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifierTime != null">
+        MODIFIER_TIME = #{record.modifierTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.flag != null">
+        FLAG = #{record.flag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchNumber != null">
+        BATCH_NUMBER = #{record.batchNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tbl_occupation_category
+    set ID = #{record.id,jdbcType=INTEGER},
+      BIG_CATEGORY = #{record.bigCategory,jdbcType=VARCHAR},
+      BIG_CATEGORY_NAME = #{record.bigCategoryName,jdbcType=VARCHAR},
+      MEDIUM_CATEGORY = #{record.mediumCategory,jdbcType=VARCHAR},
+      MEDIUM_CATEGORY_NAME = #{record.mediumCategoryName,jdbcType=VARCHAR},
+      SMALL_CATEGORY = #{record.smallCategory,jdbcType=VARCHAR},
+      SMALL_CATEGORY_NAME = #{record.smallCategoryName,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      MODIFIER = #{record.modifier,jdbcType=VARCHAR},
+      MODIFIER_TIME = #{record.modifierTime,jdbcType=TIMESTAMP},
+      FLAG = #{record.flag,jdbcType=VARCHAR},
+      BATCH_NUMBER = #{record.batchNumber,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
